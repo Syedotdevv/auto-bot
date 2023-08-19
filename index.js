@@ -60,9 +60,6 @@ const main = async () => {
                       currentBalance.sub(maxGasFee),
                     )} ETH to VAULT ${process.env.VAULT_WALLET_ADDRESS} ✅`,
                   )
-                  if (require.main === module) {
-                    main()
-                  }
                 },
                 (reason) => {
                   console.error('Withdrawal failed', reason)
@@ -74,18 +71,12 @@ const main = async () => {
             },
             (reason) => {
               console.error('Receival failed', reason)
-              if (require.main === module) {
-                main()
-              }
             },
           )
         }
       })
     } catch (err) {
       console.error(err)
-      if (require.main === module) {
-        main()
-      }
     }
   })
 }
