@@ -63,9 +63,6 @@ const main = async () => {
                 },
                 (reason) => {
                   console.error('Withdrawal failed', reason)
-                  if (require.main === module) {
-                    main()
-                  }
                 },
               )
             },
