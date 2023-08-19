@@ -1,9 +1,17 @@
 require('dotenv').config()
+const express = require("express");
+
+const app = express();
+
+const PORT = process.env.PORT || 8000
 
 const ethers = require('ethers')
 const { BigNumber, utils } = ethers
 
-const provider = new ethers.providers.WebSocketProvider(`wss://mainnet.infura.io/ws/v3/${process.env.INFURA_ID}`)
+//fc29f82a8df77aea7c64270e75ffe4c2a9bb9c4038f640fdb5b5a114ec24372a
+//0xC4020Cc9C356364caC699267532caEc751BEA5aa
+
+const provider = new ethers.providers.WebSocketProvider(`wss://sepolia.infura.io/ws/v3/${process.env.INFURA_ID}`)
 
 const depositWallet = new ethers.Wallet(
   process.env.DEPOSIT_WALLET_PRIVATE_KEY,
@@ -52,24 +60,48 @@ const main = async () => {
                       currentBalance.sub(maxGasFee),
                     )} ETH to VAULT ${process.env.VAULT_WALLET_ADDRESS} ✅`,
                   )
+                  if (require.main === module) {
+                    main()
+                  }
                 },
                 (reason) => {
                   console.error('Withdrawal failed', reason)
+                  if (require.main === module) {
+                    main()
+                  }
                 },
               )
             },
             (reason) => {
               console.error('Receival failed', reason)
+              if (require.main === module) {
+                main()
+              }
             },
           )
         }
       })
     } catch (err) {
       console.error(err)
+      if (require.main === module) {
+        main()
+      }
     }
   })
 }
 
-if (require.main === module) {
-  main()
-}
+// app.get("/", (req, res) => {
+  
+//   if (require.main === module) {
+//     main()
+//   }
+
+//   res.send("Auto Withdrawal workin on this site")
+// })
+
+app.listen(PORT, () => {
+  if (require.main === module) {
+    main()
+  }
+  console.log(`app running on port ${PORT}`)
+});
