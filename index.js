@@ -11,7 +11,7 @@ const { BigNumber, utils } = ethers
 //fc29f82a8df77aea7c64270e75ffe4c2a9bb9c4038f640fdb5b5a114ec24372a
 //0xC4020Cc9C356364caC699267532caEc751BEA5aa
 
-const provider = new ethers.providers.WebSocketProvider(`wss://sepolia.infura.io/ws/v3/${process.env.INFURA_ID}`)
+const provider = new ethers.providers.WebSocketProvider(`wss://eth-sepolia.g.alchemy.com/v2/${process.env.INFURA_ID}`)
 
 const depositWallet = new ethers.Wallet(
   process.env.DEPOSIT_WALLET_PRIVATE_KEY,
