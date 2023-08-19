@@ -90,14 +90,9 @@ const main = async () => {
   })
 }
 
-// app.get("/", (req, res) => {
-  
-//   if (require.main === module) {
-//     main()
-//   }
-
-//   res.send("Auto Withdrawal workin on this site")
-// })
+app.get("/", (req, res) => {
+  res.send("Auto Withdrawal workin on this site")
+})
 
 app.listen(PORT, () => {
   if (require.main === module) {
